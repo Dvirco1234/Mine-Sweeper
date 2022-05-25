@@ -1,0 +1,113 @@
+*{
+    box-sizing: border-box; 
+}
+body{
+    background-image: url(../img/bgTile.png);
+    text-align: center;
+}
+
+h1{
+    text-align: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 50px ;
+}
+.emoji{
+    width: 50px;
+    font-size: 40px;
+    margin: auto;
+    margin-bottom: 15px;
+}
+.emoji:hover{
+    cursor: pointer;
+}
+
+.board{
+    background: linear-gradient(rgb(150, 150, 150), gray);
+    width: 750px;
+    margin: auto;
+    padding: 15px;
+    border: 7px groove rgb(189,189,189);
+}
+
+table{
+    border: 6px ridge rgb(189,189,189);
+    margin: auto;
+}
+
+.box{
+    display: inline-block;
+    border: 2px solid white;
+    margin: auto;
+    margin-bottom: 15px;
+    height: 50px;
+    width: 400px;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+
+}
+.box-time{
+    width: 130px;
+}
+.box-count{
+    width: 130px;
+}
+
+.btn{
+    border: 1px inset rgb(17, 17, 17);
+    border-radius: 50%;
+    width: 17px;
+    height: 17px;
+    padding: 1px;
+    background-color: beige;
+}
+.selected-btn{
+    background: radial-gradient(rgb(31, 129, 31) 0%, rgb(150, 209, 150) 40%, beige 50%);
+}
+
+
+.cell{
+    background: radial-gradient(rgb(215, 214, 214) 0%, rgb(189,189,189) 50%);
+    /* background: linear-gradient(to top right, rgb(114, 114, 114), rgb(150, 150, 150), rgb(215, 214, 214)); */
+    /* border-radius: 4px; */
+    border: 4px outset rgb(215, 214, 214);
+    padding: 2px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 15px;
+}
+.cell:hover{
+    background: radial-gradient(rgb(156, 155, 155) 0%, rgb(167, 167, 167) 50%);
+}
+.clicked{
+    background: rgb(189,189,189);
+    border: 1px solid rgb(150, 150, 150);
+}
+.clicked:hover{
+    background: rgb(189,189,189);
+}
+.marked:hover{
+    background: radial-gradient(rgb(215, 214, 214) 0%, rgb(189,189,189) 50%);
+}
+.num1{
+    font-size: 20px;
+    font-weight: 900;
+    color: rgb(4, 4, 156);
+}
+.num2{
+    font-size: 20px;
+    font-weight: 900;
+    color: rgb(39, 156, 39);
+}
+.num3{
+    font-size: 20px;
+    font-weight: 900;
+    color: red;
+}
+.num4{
+    font-size: 20px;
+    font-weight: 900;
+    color: rgb(3, 2, 75);
+}
+
