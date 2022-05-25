@@ -11,6 +11,15 @@ h1{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 50px ;
 }
+
+.lives{
+    text-align: left;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+.lives span{
+    color: rgb(181, 0, 0);
+}
 .emoji{
     width: 50px;
     font-size: 40px;
@@ -35,6 +44,7 @@ table{
 }
 
 .box{
+    background: linear-gradient(rgb(227, 225, 225), rgb(189, 189, 189));
     display: inline-block;
     border: 2px solid white;
     margin: auto;
@@ -110,4 +120,11 @@ table{
     font-weight: 900;
     color: rgb(3, 2, 75);
 }
+.mine-modal{
+    position: relative;
+    font-size: 100px;
+    bottom: 250px;
+    display: none;
+}
+
 

@@ -9,17 +9,20 @@
 </head>
 <body onload="initGame()">
     <h1>Minesweeper</h1>
+    <div class="lives">Lives: <span> ❤ ❤ ❤</span></div>
     
     <div class="board">
         <div class="box box-count">Marked Count:<br><span>0</span><span class="size"></span></div>
         <div class="box box-button"></div>
         <div class="box box-time">Time:<br><span>00:00:000</span></div>
         
-        <div class="emoji" onclick="newGame(this)">😊</div>
+        <div class="emoji" onclick="initGame(this)">😊</div>
         <table  cellpadding="15">
-        <tbody></tbody>
+            <tbody></tbody>
         </table>
+        
     </div>
+    <div class="mine-modal">💥</div>
     <!-- <button onclick="newGame(this)">emoji</button> -->
     
     <script src="js/main.js"></script>
