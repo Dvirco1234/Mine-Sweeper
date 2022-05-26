@@ -14,17 +14,26 @@
     <div class="board">
         <div class="box box-count">Marked Count:<br><span>0</span><span class="size"></span></div>
         <div class="box box-button"></div>
-        <div class="box box-time">Time:<br><span>00:00:000</span></div>
+        <div class="box box-time">Time:<br><span>00:00</span></div>
         
         <div class="emoji" onclick="initGame(this)">😊</div>
         <table  cellpadding="15">
             <tbody></tbody>
         </table>
         
+        <!-- <div class="hints">Hints: <div class="hint hint1" onclick="giveHint(this)"> 💡 </div><div class="hint hint2" onclick="giveHint(this)"> 💡 </div><div class="hint hint3" onclick="giveHint(this)"> 💡 </div></div> -->
+        <div class="hints"></div>
     </div>
     <div class="mine-modal">💥</div>
-    <!-- <button onclick="newGame(this)">emoji</button> -->
     
+    <div class="safe-btn"><button class="safe" onclick="safeClick()">Safe Click 👀</button><br><span>3 Clicks available</span></div><br>
+    <div class="manual-pos-btn"><button class="manual-pos" onclick="toggleManuallyPositionMines(this)">Manually Locate Mines</button><br><span>2 Mines Left</span></div><br>
+   
+    <button class="undo" onclick="undo(this)">&#8634; Undo</button>
+    <button class="seven-boom" onclick="sevenBoom()">7 boom!</button>
+
+    <div class="footer">Dvir Cohen - Minesweeper</div>
+
     <script src="js/main.js"></script>
     <script src="js/utils.js"></script>
 </body>
