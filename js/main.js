@@ -249,6 +249,7 @@ function expandShown(rowIdx, colIdx){
         for (var j = colIdx - 1; j <= colIdx + 1; j++) {
             if (j < 0 || j >= gBoard[i].length) continue
             if (i === rowIdx && j === colIdx) continue
+            if (gBoard[i][j].isMine) continue
             
             var elCell = document.querySelector(`.cell-${i}-${j}`)
             if (!gBoard[i][j].isShown){
