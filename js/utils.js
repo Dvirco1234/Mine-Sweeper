@@ -20,7 +20,6 @@
 }
 
 function hideShown(rowIdx, colIdx){
-    
   for (var i = rowIdx - 1; i <= rowIdx + 1; i++) {
       if (i < 0 || i >= gBoard.length) continue
       
@@ -44,7 +43,18 @@ function hideShown(rowIdx, colIdx){
 }
 
 
-
+// function makeModern(elBtn){
+//     gGame.isModern = !gGame.isModern
+    
+//     if(gGame.isModern){
+//         elBtn.innerText = 'Vintage'
+//         document.querySelector('.con').innerHTML = '<link rel="stylesheet" href="css/modern.css">'
+//     } else {
+//         elBtn.innerText = 'Modern'
+//         document.querySelector('.con').innerHTML = ''
+//     }
+    
+// }
 
 // if(j < 0){
 //   gBoard[i][j + 3].isEmpty = true

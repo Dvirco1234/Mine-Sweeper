@@ -8,15 +8,28 @@
 body{
     background-image: url(../img/bgTile.png);
     text-align: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 h1{
     text-align: center;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 50px ;
+    /* font-family: Arial, Helvetica, sans-serif; */
+}
+.best-score{
+    position: absolute;
+    font-size: 25px;
+    padding: 10px 10px 0px 10px;
+    top: 50px;
+    left: 0%;
+}
+.best-score span{
+    font-weight: bolder;
 }
 
 .lives{
+    position: absolute;
+    top: 10px;
     font-size: 25px;
     margin-bottom: 10px;
     text-align: left;
@@ -27,7 +40,7 @@ h1{
     cursor: pointer;
     text-align: left;
     height: 30px;
-    margin-top: 5px;
+    margin-top: 15px;
 }
 .hint{
     display: inline-block;
@@ -36,6 +49,7 @@ h1{
     color: rgb(181, 0, 0);
 }
 .emoji{
+    right: 50%;
     width: 50px;
     font-size: 40px;
     margin: auto;
@@ -127,44 +141,33 @@ table{
 .safe-cell{
     background: linear-gradient(rgb(73, 173, 73), rgb(139, 222, 139));
 }
-.num1{
+
+.nums{
     font-size: 20px;
     font-weight: 900;
+}
+.num1{
     color: rgb(4, 4, 156);
 }
 .num2{
-    font-size: 20px;
-    font-weight: 900;
     color: rgb(39, 156, 39);
 }
 .num3{
-    font-size: 20px;
-    font-weight: 900;
     color: red;
 }
 .num4{
-    font-size: 20px;
-    font-weight: 900;
     color: rgb(3, 2, 75);
 }
 .num5{
-    font-size: 20px;
-    font-weight: 900;
     color: rgb(233, 94, 94);
 }
 .num6{
-    font-size: 20px;
-    font-weight: 900;
     color: rgb(8, 155, 116);
 }
 .num7{
-    font-size: 20px;
-    font-weight: 900;
     color: rgb(138, 8, 155);
 }
 .num8{
-    font-size: 20px;
-    font-weight: 900;
     color: rgb(29, 29, 29);
 }
 .mine-modal{
@@ -185,43 +188,52 @@ button{
 	align-items: center;
 }
 .safe {
-	border: 1px #ffaa22 solid;
+    border: 1px #ffaa22 solid;
 	background: linear-gradient(180deg, #ffed64 5%, #ffab23 100%);
 	text-shadow: 1px 1px 1px #ffed66;
 	box-shadow: inset 1px 1px 2px 0px #fff6af;
     margin-bottom: 4px;
+    /* width: 230px; */
 }
 .safe:hover {
-	background: linear-gradient(180deg, #ffab23 5%, #ffed64 100%);
+    background: linear-gradient(180deg, #ffab23 5%, #ffed64 100%);
 }
 .safe-btn{
+    text-align: center;
     margin: 10px;
     display: inline-block;
 }
 .undo {
-	border: 1px #3381ed solid;
+    border: 1px #3381ed solid;
 	background: linear-gradient(180deg, #3d93f6 5%, #1e62d0 100%);
 	text-shadow: 1px 1px 1px #1571cd;
 	box-shadow: inset 1px 1px 2px 0px #97c4fe;
-    margin-bottom: 5px;
+    margin-top: 15px;
 }
 .undo:hover {
-	background: linear-gradient(180deg, #1e62d0 5%, #3d93f6 100%);
+    background: linear-gradient(180deg, #1e62d0 5%, #3d93f6 100%);
 }
 .seven-boom {
-	border: 1px #ee1eb6 solid;
+    border: 1px #ee1eb6 solid;
 	background: linear-gradient(180deg, #fa7f72 5%, #ca4e40 100%);
 	text-shadow: 1px 1px 1px #ffffff;
 	box-shadow: 0px 10px 14px -7px #616174;
+    margin-top: 15px;
 }
 .seven-boom:hover {
-	background: linear-gradient(180deg, #ca4e40 5%, #fa7f72 100%);
+    background: linear-gradient(180deg, #ca4e40 5%, #fa7f72 100%);
+}
+.manual-pos-btn{
+    display: inline-block;
 }
 .manual-pos{
     border: 0px #79a919 solid;
     background: linear-gradient(180deg, #99cd32 5%, #79a919 100%);
 	text-shadow: 1px 1px 1px #ffffff;
 	box-shadow: 0px 10px 14px -7px #616174;
+    margin-bottom: 5px;
+    width: 230px;
+    text-align: center;
 }
 .manual-pos:hover {
 	background: linear-gradient(180deg, #79a919 5%, #99cd32 100%);
@@ -234,12 +246,17 @@ button{
 }
 
 .undo{
-    margin-bottom: 30px;
+    position: relative;
+    bottom: 32px;
     margin-right: 10px;
 }
 .seven-boom{
-    margin-bottom: 30px;
+    position: relative;
+    bottom: 30px;
     margin-left: 10px;
+}
+h3{
+    opacity: 0;
 }
 
 .footer{
@@ -251,4 +268,13 @@ button{
     height: 30px;
     background: rgb(184, 180, 180);
     opacity: 0.9;
+}
+
+.modern-btn{
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    border: 1px #e0bfbf solid;
+	background: linear-gradient(180deg, #d7b6b6 5%, #9f8c8c 100%);
+    color: rgb(230, 230, 230);
 }

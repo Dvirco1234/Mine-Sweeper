@@ -9,17 +9,10 @@ const WINNER = '😎'
 const HINT = '💡'
 
 var gBoard
-var gGame //= { 
-//     isOn: false,
-//     shownCount: 0,
-//     markedCount: 0,
-//     safeClicks: 3,
-//     secsPassed: 0,
-//     lives: ['❤ ', '❤ ', '❤ '],
-//     isHint: false,
-//     isWin: false,
-//     isGameOver: false
-// }
+var gGame = {
+    isModern: false,
+}
+
 var gLevel = {
     size: 4,
     mines: 2,
@@ -71,11 +64,15 @@ function initGame(){
     document.querySelector('.manual-pos').innerText = 'Manually Locate Mines'
     document.querySelector('.manual-pos').classList.remove('manual-pos-clicked')
     document.querySelector('.manual-pos-btn span').innerText = `${gLevel.mines} Mines Left`
+
+    // document.querySelector('.best-score').innerText = `Best Score ${gLevel.size}x${gLevel.size}: `
 }
 
 function startGame(i, j){
     gGame.isOn = true
-    if(gLevel.minesCounter && !gGame.isSevenBoom) addRandMines(i, j) // only if the counter !== 0- it meens no manual locations
+    // only if the counter !== 0- it meens no manual locations
+    // or if 7 boom
+    if(gLevel.minesCounter && !gGame.isSevenBoom) addRandMines(i, j) 
 
     buildBoard()
     renderBoard(gBoard)
@@ -148,7 +145,7 @@ function renderBoard(board){
         for (var j = 0; j < board[0].length; j++) {
             var cell = board[i][j].minesAroundCount
             var className = `cell cell-${i}-${j}`
-            strHTML += `<td class="${className} num${cell}`
+            strHTML += `<td class="${className} nums num${cell}`
             if(gBoard[i][j].isMine) strHTML += ` mine`
             strHTML += `" onclick="cellClicked(this, ${i}, ${j});manuallyLocateMines(this, ${i}, ${j});" oncontextmenu="rightClick(event, this, ${i}, ${j})"><span hidden>${cell}</span><span class="flag"></span></td>` //hidden span for content, and flag span to add or remove flag.
         }
@@ -183,6 +180,16 @@ function cellClicked(elCell, i, j){
     if(!gGame.isOn){       
         makeNegsEmpty(i, j) //When first clicking, cell must be empty
         startGame(i, j)
+
+        // debuging first click without recursion
+        document.querySelector(`.cell-${i}-${j}`).classList.add('clicked') // debugged
+        gBoard[i][j].isShown = true
+        gGame.shownCount++
+        if(gBoard[i][j].minesAroundCount) document.querySelector(`.cell-${i}-${j} span`).hidden = false // debugged
+        gGame.allMoves.push({i, j, elCell, })
+        expandShown(i, j)
+        return
+        // debuging first click without recursion
     }
     if(gGame.isHint){
         stopHint(elCell, i, j)
@@ -203,7 +210,7 @@ function cellClicked(elCell, i, j){
 
     // remember last turn
     gGame.allMoves.push({i, j, elCell, })
-    // console.log(gGame.shownCount);
+    console.log(gGame.shownCount);
 
     // show cell content only if !== 0
     if(gBoard[i][j].minesAroundCount) document.querySelector(`.cell-${i}-${j} span`).hidden = false // debugged
@@ -221,14 +228,12 @@ function rightClick(clickEvent, elCell, i, j) {
         gBoard[i][j].isMarked = true
         elCell.querySelector('.flag').innerText = FLAG
         elCell.classList.add('marked')
-        // if(gBoard[i][j].isMine) gGame.markedCount++
         gGame.markedCount++
         document.querySelector('.box-count span').innerText = gLevel.mines - gGame.markedCount
     } else {
         gBoard[i][j].isMarked = false
         elCell.querySelector('.flag').innerText = ''
         elCell.classList.remove('marked')
-        // if(gBoard[i][j].isMine) gGame.markedCount--
         gGame.markedCount--
         document.querySelector('.box-count span').innerText = gLevel.mines - gGame.markedCount
     }
@@ -250,7 +255,7 @@ function expandShown(rowIdx, colIdx){
                 elCell.classList.add('clicked')
                 gBoard[i][j].isShown = true
                 gGame.shownCount++ // Update number of clicked cell
-                console.log('count:' ,gGame.shownCount);
+                // console.log('count:' ,gGame.shownCount);
 
                 if(gBoard[i][j].minesAroundCount) elCell.querySelector('span').hidden = false
                 if(gBoard[i][j].minesAroundCount === 0) expandShown(i, j)
@@ -268,14 +273,26 @@ function undo(){
 
     if(gBoard[i][j].minesAroundCount === 0){
         hideShown(i, j)
-        gGame.shownCount--
+        // gGame.shownCount--
     }
 
     document.querySelector(`.cell-${i}-${j}`).classList.remove('clicked')
     gBoard[i][j].isShown = false
-    gGame.shownCount--
+    // gGame.shownCount--
 
     if(gBoard[i][j].minesAroundCount) document.querySelector(`.cell-${i}-${j} span`).hidden = true
+}
+
+function checkBestScore(){
+    var currScore = gGame.secsPassed
+
+
+
+    if(!localStorage[`bestScore${gLevel.size}`]) localStorage.setItem(`bestScore${gLevel.size}`, currScore)
+
+    if (currScore < localStorage[`bestScore${gLevel.size}`]) localStorage[`bestScore${gLevel.size}`] = currScore
+    
+    document.querySelector('.best-score span').innerText = localStorage.getItem(`bestScore${gLevel.size}`) + ' Seconds!'
 }
 
 function checkWin(){
@@ -284,6 +301,7 @@ function checkWin(){
         gGame.isWin = true
         console.log(gGame.isWin)
         gameOver()
+        checkBestScore()
     }
 }
 
@@ -334,6 +352,7 @@ function renderHints(){
 }
 
 function giveHint(elHint){
+    if(!gGame.isOn || gGame.isGameOver || gGame.isWin) return
     gGame.isHint = true
     elHint.style.display = 'none'
 }
@@ -369,7 +388,7 @@ function safeClick(){
         cell.classList.add('safe-cell')
         
         isFound = true
-        console.log('isFound:', isFound)
+        // console.log('isFound:', isFound)
         setTimeout(() =>{
             cell.classList.remove('safe-cell')
         } ,1500)
@@ -402,22 +421,24 @@ function manuallyLocateMines(elCell, i, j){
 }
 
 function sevenBoom(){
+    if(gGame.isOn) return
+    initGame()
     gGame.isSevenBoom = true
     var count = 0
     var minesCount = 0
     for(var i = 0; i < gBoard.length; i++){
         for(var j = 0; j < gBoard[0].length; j++){
-            if(count % 7 === 0 || (count - 7 % 10 === 0)) {
-                if(i !== 0){
-                    gBoard[i][j].isMine = true
-                    gBoard[i][j].minesAroundCount = MINE
-                    minesCount++
-                }
-            }
             count++
+            if(i === 0 && j === 0) continue
+            if(count % 7 === 0 || (count - 7) % 10 === 0) {
+                gBoard[i][j].isMine = true
+                gBoard[i][j].minesAroundCount = MINE
+                minesCount++
+            }
         }
     }
     gLevel.mines = minesCount
+    document.querySelector('.box-count span').innerText = gLevel.mines
     startGame()
 }
 
@@ -444,6 +465,8 @@ function choseLevel(elBtn, size){
     else if(size === 8) gLevel.mines = 12
     else gLevel.mines = 30
 
+    // //Best score
+    // document.querySelector('.best-score').innerText = `Best Score ${gLevel.size}x${gLevel.size}: `
     //for manually locate mines
     gLevel.minesCounter = gLevel.mines 
     document.querySelector('.manual-pos-btn span').innerText = `${gLevel.mines} Mines Left`
@@ -459,26 +482,26 @@ function timer(){
     // var now = new Date()
     var seconds = Math.floor((new Date() - gTimer.startTimer) / 1000)
     
+    gGame.secsPassed++
+    // console.log('gGame.secsPassed:', gGame.secsPassed)
     if(seconds > 59){
         gTimer.startTimer = new Date()
         gTimer.countMinutes++
     } 
     if(seconds > 9) elTime.innerText = `0${gTimer.countMinutes}:${seconds}`
-    else elTime.innerText = `0${gTimer.countMinutes}:0${seconds}`
+    else elTime.innerText = `0${gTimer.countMinutes}:0${seconds}`  
+}
+
+function makeModern(elBtn){
+    gGame.isModern = !gGame.isModern
+    
+    if(gGame.isModern){
+        elBtn.innerText = 'Vintage'
+        document.querySelector('.container').innerHTML = '<link rel="stylesheet" href="css/modern.css">'
+    } else {
+        elBtn.innerText = 'Modern'
+        document.querySelector('.container').innerHTML = ''
+    }
     
 }
-// function timer(){
-//     var elTime = document.querySelector(`.box-time span`)
-//     var now = new Date()
-//     var seconds = Math.floor((now - gTimer.startTimer) / 1000)
-//     var milliseconds = (now - gTimer.startTimer) % 1000
-    
-//     if(seconds > 59){
-//         gTimer.startTimer = new Date()
-//         gTimer.countMinutes++
-//     } 
-//     if(seconds > 9) elTime.innerText = `0${gTimer.countMinutes}:${seconds}:${milliseconds}`
-//     else elTime.innerText = `0${gTimer.countMinutes}:0${seconds}:${milliseconds}`
-    
-// }
 

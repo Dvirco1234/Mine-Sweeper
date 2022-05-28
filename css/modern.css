@@ -1,0 +1,78 @@
+
+body{
+    background-image: url(../img/galaxy.jpg);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: rgba(255, 238, 238, 0.981);
+}
+.board{
+    background: none;
+    border: none;
+    width: 750px;
+    margin: auto;
+    padding: 15px;
+}
+table{
+    border: none;
+    margin: auto;
+    box-shadow: 1px 2px 13px 1px #000;
+}
+.cell{
+    background: radial-gradient(rgb(233, 225, 225) 0%, rgb(222, 214, 214) 50%);
+    border: none;
+    border-radius: 4px;
+    padding: 2px;
+    width: 50px;
+    height: 50px;
+}
+.cell:hover{
+    background: radial-gradient(rgb(212, 181, 181) 0%, rgb(213, 191, 191) 50%);
+}
+.clicked{
+    background: rgb(149, 129, 129);
+    border: none;
+}
+.clicked:hover{
+    background: rgb(149, 129, 129);
+}
+.marked:hover{
+    background: radial-gradient(rgb(215, 214, 214) 0%, rgb(189,189,189) 50%);
+}
+.box{
+    background: linear-gradient(rgb(113, 103, 103), rgb(189, 189, 189));
+}
+.selected-btn{
+    background: radial-gradient(rgb(36, 37, 36) 0%, rgb(91, 95, 91) 40%, #9f8c8c 50%);
+}
+
+button{
+    border: 1px #e0bfbf solid;
+	background: linear-gradient(180deg, #d7b6b6 5%, #9f8c8c 100%);
+}
+.safe-cell{
+    background: linear-gradient(rgb(73, 173, 73), rgb(139, 222, 139));
+}
+.nums{
+    font-size: 23px;
+}
+
+.num1{
+    color: rgb(218, 218, 225);
+}
+.num2{
+    color: rgb(186, 191, 186);
+}
+.num3{
+    color: rgb(185, 182, 182);
+}
+.num4{
+    color: rgb(188, 160, 175);
+}
+.num5{
+    color: rgb(149, 143, 143);
+}
+.footer{
+    color: rgb(21, 21, 21);
+}
+
+
+
